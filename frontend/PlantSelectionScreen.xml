@@ -1,0 +1,6 @@
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="frontend.PlantSelectionController">
+    <ComboBox fx:id="regionComboBox" layoutX="50" layoutY="50"/>
+    <ComboBox fx:id="plantComboBox" layoutX="50" layoutY="100"/>
+    <Button text="Fetch Plants" layoutX="50" layoutY="150" onAction="#fetchPlants"/>
+    <Label fx:id="instructionsLabel" layoutX="50" layoutY="200"/>
+</AnchorPane>
