@@ -30,7 +30,7 @@ public class LoginScreen {
 
             // Database check for login
             try (Connection connection = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/community_garden_planner", "root", "minecraft@OP1")) {
+                    "jdbc:mysql://localhost:3306/", "", "")) {
 
                 String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
                 PreparedStatement preparedStatement = connection.prepareStatement(sql);
