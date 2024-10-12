@@ -115,9 +115,9 @@ public class PlantSelectionScreen {
 
     // Update the plant selection in the database
     private void updatePlantSelectionInDatabase(String plantName) {
-        String url = "jdbc:mysql://localhost:3306/community_garden_planner"; // Update the database URL if needed
-        String user = "root"; // Your database username
-        String password = "minecraft@OP1"; // Your database password
+        String url = "jdbc:mysql://localhost:3306/"; // Update the database URL if needed
+        String user = ""; // Your database username
+        String password = ""; // Your database password
 
         // Update to use the correct column name
         String updateQuery = "UPDATE users SET selected_plants = ? WHERE username = ?";
