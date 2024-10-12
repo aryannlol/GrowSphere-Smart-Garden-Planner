@@ -166,7 +166,7 @@ public class RegionSelectionScreen {
         String sql = "UPDATE users SET region = ? WHERE username = ?";
 
         try (Connection connection = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/community_garden_planner", "root", "minecraft@OP1");
+                "jdbc:mysql://localhost:3306/", "", "");
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
             preparedStatement.setString(1, selectedRegion);
@@ -189,7 +189,7 @@ public class RegionSelectionScreen {
                 "SELECT ?, ? WHERE NOT EXISTS (SELECT 1 FROM plant_selection WHERE username = ? AND plant_name = ?)";
 
         try (Connection connection = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/community_garden_planner", "root", "minecraft@OP1");
+                "jdbc:mysql://localhost:3306/", "", "");
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
             preparedStatement.setString(1, username);
