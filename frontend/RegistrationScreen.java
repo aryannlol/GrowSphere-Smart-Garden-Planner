@@ -30,7 +30,7 @@ public class RegistrationScreen {
 
             // Database connection and insertion logic
             try {
-                Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/community_garden_planner", "root", "minecraft@OP1");
+                Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/", "", "");
                 String sql = "INSERT INTO users (username, password) VALUES (?, ?)";
                 PreparedStatement preparedStatement = connection.prepareStatement(sql);
                 preparedStatement.setString(1, username);
