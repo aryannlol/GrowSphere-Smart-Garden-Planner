@@ -59,7 +59,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Community Garden Planner");
-        primaryStage.setWidth(600);
+        primaryStage.setWidth(1100);
         primaryStage.setHeight(700);
 
         // Set the application icon
@@ -74,8 +74,9 @@ public class Main extends Application {
         mainLayout.setAlignment(Pos.CENTER); // Center align all elements vertically and horizontally
 
         // Create the main title with gradient
+
         Label titleLabel = new Label("COMMUNITY GARDEN PLANNER");
-        titleLabel.setFont(Font.font("Arial", FontWeight.BOLD, 28));
+        titleLabel.setFont(Font.font("Arial", FontWeight.BOLD, 50));
         titleLabel.setTextFill(Color.WHITE);
         titleLabel.setStyle("-fx-background-color: transparent; -fx-background-radius: 5; -fx-padding: 10;");
 
@@ -154,7 +155,7 @@ public class Main extends Application {
 
                     // Set the new scene to the primary stage
                     Stage primaryStage = (Stage) submitLoginButton.getScene().getWindow(); // Get the current primary stage
-                    primaryStage.setScene(new Scene(mainLayout, 600, 400)); // Set the new scene
+                    primaryStage.setScene(new Scene(mainLayout, 1100, 700)); // Set the new scene
                     primaryStage.show(); // Show the updated stage
                 } else {
                     feedbackLabel.setText("Invalid username or password.");
@@ -215,9 +216,15 @@ public class Main extends Application {
         Button submitRegisterButton = createButton("Submit");
         submitRegisterButton.setOnAction(e -> {
             // Collect the username, email, and password from the input fields
-            String username = regUsernameField.getText();
-            String email = regEmailField.getText();  // Get email from the new field
-            String password = regPasswordField.getText();
+            String username = regUsernameField.getText().trim();
+            String email = regEmailField.getText().trim();  // Get email from the new field
+            String password = regPasswordField.getText().trim();
+
+            // Validate input fields
+            if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
+                feedbackLabel.setText("Cannot leave fields empty.");
+                return; // Stop further execution
+            }
 
             // Create a User object
             User newUser = new User(username, password, email, null, null); // Pass email to the User object
@@ -230,6 +237,7 @@ public class Main extends Application {
                 feedbackLabel.setText("Registration failed: " + ex.getMessage());
             }
         });
+
 
         Button backButton = createButton("Back");
         backButton.setOnAction(e -> resetToMainMenu());
@@ -279,7 +287,7 @@ public class Main extends Application {
 
     private Label createTitleLabel() {
         Label titleLabel = new Label("COMMUNITY GARDEN PLANNER");
-        titleLabel.setFont(Font.font("Arial", FontWeight.BOLD, 28));
+        titleLabel.setFont(Font.font("Arial", FontWeight.BOLD, 50));
         titleLabel.setTextFill(Color.WHITE);
         titleLabel.setStyle("-fx-background-color: transparent; -fx-background-radius: 5; -fx-padding: 10;");
         return titleLabel;
