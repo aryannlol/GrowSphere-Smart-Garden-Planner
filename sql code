@@ -1,0 +1,75 @@
+-- Create the database if it doesn't exist
+CREATE DATABASE IF NOT EXISTS community_garden_planner;
+
+-- Use the created database
+USE community_garden_planner;
+
+-- Create users table
+CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    email VARCHAR(100),
+    region VARCHAR(255),
+    selected_plants VARCHAR(255) -- Stores selected plant for each user
+);
+
+-- Create plants table
+CREATE TABLE IF NOT EXISTS plants (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    type VARCHAR(50),
+    region VARCHAR(50),
+    care_instructions TEXT
+);
+
+-- Insert plant entries into the plants table
+INSERT INTO plants (name, type, region, care_instructions) VALUES
+-- North India
+('Rose', 'Flower', 'North India', 'Water daily and ensure good sunlight. Prune regularly to promote growth.'),
+('Neem', 'Tree', 'North India', 'Water once a week. Ensure it receives plenty of sunlight. Neem oil can be used as a natural pesticide.'),
+('Marigold', 'Flower', 'North India', 'Water every 2-3 days and ensure they get at least 6 hours of sunlight.'),
+-- South India
+('Mango', 'Fruit', 'South India', 'Water every few days, especially during flowering. Provide regular pruning to maintain shape.'),
+('Tulsi', 'Herb', 'South India', 'Water twice a week, ensuring soil drains well. Keep in a sunny location.'),
+('Coconut', 'Tree', 'South India', 'Water weekly. Ensure it gets plenty of sunlight. Fertilize every few months with organic fertilizers.'),
+-- East India
+('Basil', 'Herb', 'East India', 'Water weekly. Keep in a sunny spot and pinch off flowers to promote leaf growth.'),
+('Lotus', 'Flower', 'East India', 'Water regularly and ensure it is submerged. Fertilize monthly to enhance blooming.'),
+('Paddy (Rice)', 'Cereal', 'East India', 'Requires a lot of water. Keep flooded during growth.'),
+-- West India
+('Coconut', 'Tree', 'West India', 'Water weekly. Ensure it gets plenty of sunlight. Fertilize every few months.'),
+('Ginger', 'Root', 'West India', 'Water regularly to keep soil moist, but avoid overwatering.'),
+('Aloe Vera', 'Succulent', 'West India', 'Water every 2-3 weeks. Allow soil to dry out between waterings.');
+
+-- Create plant care guide table
+CREATE TABLE IF NOT EXISTS plant_care_guides (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    plant_id INT,
+    care_instructions TEXT,
+    FOREIGN KEY (plant_id) REFERENCES plants(id)
+);
+
+-- Create logged in users table
+CREATE TABLE IF NOT EXISTS logged_in_users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50),
+    login_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Remove duplicate plant entries (if needed)
+DELETE FROM plants 
+WHERE id NOT IN (
+    SELECT MIN(id) 
+    FROM plants 
+    GROUP BY name
+);
+
+-- Check data after creation
+SELECT * FROM users;
+SELECT * FROM plants;
+USE community_garden_planner;
+-- Check all databases
+SHOW DATABASES;
+ALTER TABLE users
+ADD COLUMN selected_plants VARCHAR(255);  -- Adjust the size if needed
