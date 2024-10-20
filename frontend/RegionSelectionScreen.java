@@ -215,7 +215,7 @@ public class RegionSelectionScreen {
         String sql = "UPDATE users SET region = ? WHERE username = ?";
 
         try (Connection connection = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/community_garden_planner", "root", "minecraft@OP1");
+                "jdbc:mysql://localhost:3306/community_garden_planner", "", "");
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, selectedRegion);
             pstmt.setString(2, username);
